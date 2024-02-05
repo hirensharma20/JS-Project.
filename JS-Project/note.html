@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>currency calculator</title>
+    <script src="https://unpkg.com/number-to-words"></script>
+</head>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    .head {
+        color: red;
+    }
+
+    .parent {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    img {
+        height: 100px;
+        width: 300px;
+    }
+
+    input {
+        height: 60px;
+        width: 80px;
+        background-color: antiquewhite;
+        border: none;
+    }
+
+    .Total {
+        width: 500px;
+    }
+</style>
+<body>
+    <center><h1 class="head">CURRENCY CALCULATOR</h1></center>
+    <div class="parent">
+        <div class="d1">
+            <table cellpadding="10px">
+                <tr>
+                    <td>
+                        <img src="noteimg/2000.jpg">
+                    </td>
+                    <td>+</td>
+                    <td>
+                        <input id="note-index2000" type="number">
+                    </td>
+                    <td>=</td>
+                    <td>
+                        <input id="total2000" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="noteimg/500.jpg">
+                    </td>
+                    <td>+</td>
+                    <td>
+                        <input id="note-index500" type="number">
+                    </td>
+                    <td>=</td>
+                    <td>
+                        <input id="total500" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="noteimg/200.jpg">
+                    </td>
+                    <td>+</td>
+                    <td>
+                        <input id="note-index200" type="number">
+                    </td>
+                    <td>=</td>
+                    <td>
+                        <input id="total200" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="noteimg/100.jpg">
+                    </td>
+                    <td>+</td>
+                    <td>
+                        <input id="note-index1100" type="number">
+                    </td>
+                    <td>=</td>
+                    <td>
+                        <input id="total100" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="noteimg/50.jpg">
+                    </td>
+                    <td>+</td>
+                    <td>
+                        <input id="note-index50" type="number">
+                    </td>
+                    <td>=</td>
+                    <td>
+                        <input id="total50" type="number">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="d2">
+            <table>
+                <tr>
+                    <td>
+                        <h1>Total</h1>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <input class="Total" id="total-amount" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>Total IN WORDS</h1>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <input id="total-amount-words" class="Total" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>Total NOTES</h1>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <input id="total-notes-count" class="Total" type="number">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function updateTotals() {
+            const note2000 = parseFloat(document.getElementById('note-index2000').value) || 0;
+            const note500 = parseFloat(document.getElementById('note-index500').value) || 0;
+            const note200 = parseFloat(document.getElementById('note-index200').value) || 0;
+            const note100 = parseFloat(document.getElementById('note-index1100').value) || 0;
+            const note50 = parseFloat(document.getElementById('note-index50').value) || 0;
+
+            const total2000 = note2000 * 2000;
+            const total500 = note500 * 500;
+            const total200 = note200 * 200;
+            const total100 = note100 * 100;
+            const total50 = note50 * 50;
+
+            document.getElementById('total2000').value = total2000;
+            document.getElementById('total500').value = total500;
+            document.getElementById('total200').value = total200;
+            document.getElementById('total100').value = total100;
+            document.getElementById('total50').value = total50;
+
+            const overallTotal = total2000 + total500 + total200 + total100 + total50;
+            document.getElementById('total-amount').value = overallTotal;
+
+            const totalNotesCount = note2000 + note500 + note200 + note100 + note50;
+            document.getElementById('total-notes-count').value = totalNotesCount;
+        }
+
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', updateTotals);
+        });
+
+        function updateWords() {
+            const overallTotal = parseFloat(document.getElementById('total-amount').value) || 0;
+            const words = numberToWords.toWords(overallTotal);
+            document.getElementById('total-amount-words').value = words;
+        }
+
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', updateWords);
+        });
+    </script>
+</body>
+</html>
